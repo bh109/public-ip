@@ -1,24 +1,13 @@
-async function loadIP() {
-    const ipBox = document.getElementById("ip");
-    ipBox.textContent = "Loading IPv4...";
+function loadIP() {
+    const output = document.getElementById("output");
+    output.innerText = "Loading...";
 
-    try {
-        const response = await fetch("https://1.1.1.1/cdn-cgi/trace", {
-            cache: "no-store"
+    fetch("https://api.ipify.org?format=json")
+        .then(res => res.json())
+        .then(data => {
+            output.innerText = "Your IPv4: " + data.ip;
+        })
+        .catch(err => {
+            output.innerText = "Failed to load IP: " + err;
         });
-
-        const text = await response.text();
-        const match = text.match(/ip=(.*)/);
-
-        if (match && match[1]) {
-            ipBox.textContent = match[1].trim(); // IPv4
-        } else {
-            ipBox.textContent = "Failed to parse IPv4";
-        }
-
-    } catch (err) {
-        ipBox.textContent = "Failed to load IPv4";
-    }
 }
-
-loadIP();
