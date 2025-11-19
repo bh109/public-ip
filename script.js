@@ -3,18 +3,14 @@ async function loadIP() {
     ipBox.textContent = "Loading...";
 
     try {
-        const url = "https://api.ipify.org?format=json&nocache=" + Math.random();
+        const response = await fetch(
+            "https://www.cloudflare.com/cdn-cgi/trace",
+            { cache: "no-store" }
+        );
 
-        const response = await fetch(url, {
-            cache: "no-store",
-            headers: {
-                "Cache-Control": "no-cache, no-store, max-age=0",
-                "Pragma": "no-cache"
-            }
-        });
-
-        const data = await response.json();
-        ipBox.textContent = data.ip;
+        const text = await response.text();
+        const ip = text.match(/ip=(.*)/)[1];
+        ipBox.textContent = ip;
 
     } catch (error) {
         ipBox.textContent = "Failed to load IP";
