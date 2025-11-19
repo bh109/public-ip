@@ -1,25 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Your Public IP</title>
-
-<!-- Disable caching -->
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-
-<link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <title>My Public IPv4</title>
 </head>
 <body>
 
-<div class="container">
-    <h1>Your Public IP Address</h1>
-    <div id="ip" class="ip-box">Loading...</div>
-    <button onclick="loadIP()">Refresh</button>
-</div>
+<h2>Your Public IPv4</h2>
+
+<button onclick="loadIP()">Get My IPv4</button>
+
+<pre id="output">Click the button...</pre>
 
 <script src="script.js"></script>
+
 </body>
 </html>
