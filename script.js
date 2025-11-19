@@ -9,10 +9,10 @@ async function loadIP() {
 
         const text = await response.text();
 
-        // Extract "ip=xxx.xxx.xxx.xxx"
+        // Extract IP from "ip=1.2.3.4"
         const match = text.match(/ip=(.*)/);
 
-        if (match) {
+        if (match && match[1]) {
             ipBox.textContent = match[1].trim();
         } else {
             ipBox.textContent = "Failed to parse IP";
