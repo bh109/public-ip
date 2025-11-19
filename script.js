@@ -3,8 +3,9 @@ async function loadIP() {
     ipBox.textContent = "Loading...";
 
     try {
-        // ipify has no cache problem
-        const response = await fetch("https://api64.ipify.org?format=json&nocache=" + Math.random(), {
+        const url = "https://api.ipify.org?format=json&nocache=" + Math.random();
+
+        const response = await fetch(url, {
             cache: "no-store",
             headers: {
                 "Cache-Control": "no-cache, no-store, max-age=0",
