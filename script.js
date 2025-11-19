@@ -1,13 +1,32 @@
+function typeText(element, text, speed = 40) {
+    element.innerHTML = "";
+    let i = 0;
+
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+
+    type();
+}
+
 function loadIP() {
-    const output = document.getElementById("output");
-    output.innerText = "Loading...";
+    const ipBox = document.getElementById("ip");
+    typeText(ipBox, "Scanning network...");
 
     fetch("https://v4.ident.me", { cache: "no-store" })
         .then(res => res.text())
         .then(ip => {
-            output.innerText = "Your IPv4: " + ip.trim();
+            setTimeout(() => {
+                typeText(ipBox, "IPv4 detected: " + ip.trim());
+            }, 800);
         })
         .catch(err => {
-            output.innerText = "Failed to load IPv4:\n" + err;
+            setTimeout(() => {
+                typeText(ipBox, "Scan failed.");
+            }, 800);
         });
 }
