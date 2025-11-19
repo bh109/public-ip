@@ -2,17 +2,75 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My Public IPv4</title>
+    <title>IP Scanner</title>
+    <style>
+        body {
+            background: #000;
+            color: #33ff33;
+            font-family: "Courier New", monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px #00ff00;
+        }
+
+        #ip {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 0 0 12px #00ff00;
+        }
+
+        button {
+            background: black;
+            border: 2px solid #33ff33;
+            color: #33ff33;
+            padding: 12px 22px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.2s;
+            font-family: "Courier New", monospace;
+        }
+
+        button:hover {
+            background: #003300;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        #cursor {
+            display: inline-block;
+            width: 12px;
+            height: 2px;
+            background: #33ff33;
+            animation: blink 0.8s infinite;
+            margin-left: 6px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
+
 <body>
 
-<h2>Your Public IPv4</h2>
+    <h1>Terminal: Public IPv4 Scanner</h1>
 
-<button onclick="loadIP()">Get My IPv4</button>
+    <div id="ip">Awaiting command<span id="cursor"></span></div>
 
-<pre id="output">Click the button...</pre>
+    <button onclick="loadIP()">SCAN NOW</button>
 
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
