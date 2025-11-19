@@ -3,7 +3,7 @@ async function loadIP() {
     ipBox.textContent = "Loading IPv4...";
 
     try {
-        const response = await fetch("https://ipv4.cloudflare.com/cdn-cgi/trace", {
+        const response = await fetch("https://1.1.1.1/cdn-cgi/trace", {
             cache: "no-store"
         });
 
@@ -11,7 +11,7 @@ async function loadIP() {
         const match = text.match(/ip=(.*)/);
 
         if (match && match[1]) {
-            ipBox.textContent = match[1].trim();
+            ipBox.textContent = match[1].trim(); // IPv4
         } else {
             ipBox.textContent = "Failed to parse IPv4";
         }
