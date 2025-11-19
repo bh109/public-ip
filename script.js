@@ -9,11 +9,11 @@ async function loadIP() {
         );
 
         const text = await response.text();
-        const ip = text.match(/ip=(.*)/)[1];
+        const ip = text.match(/ip=(.*)/)[1].trim();
         ipBox.textContent = ip;
 
     } catch (error) {
-        ipBox.textContent = "Failed to load IP";
+        ipBox.textContent = "Failed to load IP (network blocked)";
     }
 }
 
