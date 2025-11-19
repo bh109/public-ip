@@ -1,4 +1,4 @@
-function typeText(element, text, speed = 40) {
+function typeText(element, text, speed = 100) {
     element.innerHTML = "";
     let i = 0;
 
@@ -30,3 +30,4 @@ function loadIP() {
             }, 800);
         });
 }
+
