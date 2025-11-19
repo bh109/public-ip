@@ -3,17 +3,23 @@ async function loadIP() {
     ipBox.textContent = "Loading...";
 
     try {
-        const response = await fetch(
-            "https://www.cloudflare.com/cdn-cgi/trace",
-            { cache: "no-store" }
-        );
+        const response = await fetch("https://www.cloudflare.com/cdn-cgi/trace", {
+            cache: "no-store"
+        });
 
         const text = await response.text();
-        const ip = text.match(/ip=(.*)/)[1].trim();
-        ipBox.textContent = ip;
 
-    } catch (error) {
-        ipBox.textContent = "Failed to load IP (network blocked)";
+        // Extract "ip=xxx.xxx.xxx.xxx"
+        const match = text.match(/ip=(.*)/);
+
+        if (match) {
+            ipBox.textContent = match[1].trim();
+        } else {
+            ipBox.textContent = "Failed to parse IP";
+        }
+
+    } catch (err) {
+        ipBox.textContent = "Failed to load IP";
     }
 }
 
