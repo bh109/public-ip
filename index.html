@@ -23,10 +23,14 @@
         }
 
         #ip {
-            font-size: 48px;
+            font-size: 48px; /* restored original size */
             font-weight: bold;
             margin: 20px 0;
             text-shadow: 0 0 12px #00ff00;
+            min-height: 60px;
+            text-align: center;
+            line-height: 1.3em;
+            white-space: pre-line; /* allow new lines */
         }
 
         button {
@@ -39,6 +43,7 @@
             border-radius: 6px;
             transition: 0.2s;
             font-family: "Courier New", monospace;
+            margin-top: 20px;
         }
 
         button:hover {
@@ -71,6 +76,54 @@
 
     <button onclick="loadIP()">SCAN NOW</button>
 
-    <script src="script.js"></script>
+    <script>
+
+        function typeText(element, text, speed = 25) {
+            element.innerHTML = "";
+            let i = 0;
+
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+
+            type();
+        }
+
+        async function loadIP() {
+            const box = document.getElementById("ip");
+            typeText(box, "Scanning network...");
+
+            try {
+                // Step 1: Get IPv4
+                const ip = await fetch("https://v4.ident.me", { cache: "no-store" })
+                    .then(r => r.text())
+                    .then(t => t.trim());
+
+                // Step 2: Get country
+                const geo = await fetch("https://api.ip.sb/geoip/" + ip, { cache: "no-store" })
+                    .then(r => r.json());
+
+                const country = geo.country || "Unknown";
+
+                // Show IP and location on separate lines
+                const output = `IPv4: ${ip}\nLocation: ${country}`;
+
+                setTimeout(() => {
+                    typeText(box, output);
+                }, 800);
+
+            } catch (e) {
+                setTimeout(() => {
+                    typeText(box, "Scan failed.");
+                }, 800);
+            }
+        }
+
+    </script>
+
 </body>
 </html>
